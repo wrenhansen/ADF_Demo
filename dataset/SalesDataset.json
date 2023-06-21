@@ -1,0 +1,174 @@
+{
+	"name": "SalesDataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Snowflake1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeTable",
+		"schema": [
+			{
+				"name": "PRODUCTKEY",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "ORDERDATEKEY",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "DUEDATEKEY",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "SHIPDATEKEY",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "CUSTOMERKEY",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "PROMOTIONKEY",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "CURRENCYKEY",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "SALESTERRITORYKEY",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "SALESORDERNUMBER",
+				"type": "VARCHAR",
+				"precision": 20,
+				"scale": 0
+			},
+			{
+				"name": "SALESORDERLINENUMBER",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "REVISIONNUMBER",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "ORDERQUANTITY",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "UNITPRICE",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 4
+			},
+			{
+				"name": "EXTENDEDAMOUNT",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 4
+			},
+			{
+				"name": "UNITPRICEDISCOUNTPCT",
+				"type": "FLOAT",
+				"precision": 15,
+				"scale": 0
+			},
+			{
+				"name": "DISCOUNTAMOUNT",
+				"type": "FLOAT",
+				"precision": 15,
+				"scale": 0
+			},
+			{
+				"name": "PRODUCTSTANDARDCOST",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 4
+			},
+			{
+				"name": "TOTALPRODUCTCOST",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 4
+			},
+			{
+				"name": "SALESAMOUNT",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 4
+			},
+			{
+				"name": "TAXAMT",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 4
+			},
+			{
+				"name": "FREIGHT",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 4
+			},
+			{
+				"name": "CARRIERTRACKINGNUMBER",
+				"type": "VARCHAR",
+				"precision": 25,
+				"scale": 0
+			},
+			{
+				"name": "CUSTOMERPONUMBER",
+				"type": "VARCHAR",
+				"precision": 25,
+				"scale": 0
+			},
+			{
+				"name": "ORDERDATE",
+				"type": "TIMESTAMP_NTZ",
+				"precision": 29,
+				"scale": 9
+			},
+			{
+				"name": "DUEDATE",
+				"type": "TIMESTAMP_NTZ",
+				"precision": 29,
+				"scale": 9
+			},
+			{
+				"name": "SHIPDATE",
+				"type": "TIMESTAMP_NTZ",
+				"precision": 29,
+				"scale": 9
+			}
+		],
+		"typeProperties": {
+			"schema": "PUBLIC",
+			"table": "FACTINTERNETSALES"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

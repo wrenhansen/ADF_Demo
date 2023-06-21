@@ -1,0 +1,124 @@
+{
+	"name": "AggregateSalesData",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "CustomerDataset",
+						"type": "DatasetReference"
+					},
+					"name": "source1",
+					"description": "Snowflake Data Source"
+				},
+				{
+					"dataset": {
+						"referenceName": "SalesDataset",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SalesCustomerJoin",
+					"description": "join 'Customer' and 'Sales'"
+				},
+				{
+					"name": "AggregateOrder"
+				},
+				{
+					"name": "sort1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          CUSTOMERKEY as decimal(38,0),",
+				"          GEOGRAPHYKEY as decimal(38,0),",
+				"          CUSTOMERALTERNATEKEY as string,",
+				"          TITLE as string,",
+				"          FIRSTNAME as string,",
+				"          MIDDLENAME as string,",
+				"          LASTNAME as string,",
+				"          NAMESTYLE as boolean,",
+				"          BIRTHDATE as date,",
+				"          MARITALSTATUS as string,",
+				"          SUFFIX as string,",
+				"          GENDER as string,",
+				"          EMAILADDRESS as string,",
+				"          YEARLYINCOME as decimal(24,8),",
+				"          TOTALCHILDREN as decimal(38,0),",
+				"          NUMBERCHILDRENATHOME as decimal(38,0),",
+				"          ENGLISHEDUCATION as string,",
+				"          SPANISHEDUCATION as string,",
+				"          FRENCHEDUCATION as string,",
+				"          ENGLISHOCCUPATION as string,",
+				"          SPANISHOCCUPATION as string,",
+				"          FRENCHOCCUPATION as string,",
+				"          HOUSEOWNERFLAG as string,",
+				"          NUMBERCARSOWNED as decimal(38,0),",
+				"          ADDRESSLINE1 as string,",
+				"          ADDRESSLINE2 as string,",
+				"          PHONE as string,",
+				"          DATEFIRSTPURCHASE as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> source1",
+				"source(output(",
+				"          PRODUCTKEY as decimal(38,0),",
+				"          ORDERDATEKEY as decimal(38,0),",
+				"          DUEDATEKEY as decimal(38,0),",
+				"          SHIPDATEKEY as decimal(38,0),",
+				"          CUSTOMERKEY as decimal(38,0),",
+				"          PROMOTIONKEY as decimal(38,0),",
+				"          CURRENCYKEY as decimal(38,0),",
+				"          SALESTERRITORYKEY as decimal(38,0),",
+				"          SALESORDERNUMBER as string,",
+				"          SALESORDERLINENUMBER as decimal(38,0),",
+				"          REVISIONNUMBER as decimal(38,0),",
+				"          ORDERQUANTITY as decimal(38,0),",
+				"          UNITPRICE as decimal(38,4),",
+				"          EXTENDEDAMOUNT as decimal(38,4),",
+				"          UNITPRICEDISCOUNTPCT as double,",
+				"          DISCOUNTAMOUNT as double,",
+				"          PRODUCTSTANDARDCOST as decimal(38,4),",
+				"          TOTALPRODUCTCOST as decimal(38,4),",
+				"          SALESAMOUNT as decimal(38,4),",
+				"          TAXAMT as decimal(38,4),",
+				"          FREIGHT as decimal(38,4),",
+				"          CARRIERTRACKINGNUMBER as string,",
+				"          CUSTOMERPONUMBER as string,",
+				"          ORDERDATE as timestamp,",
+				"          DUEDATE as timestamp,",
+				"          SHIPDATE as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> source2",
+				"source1, source2 join(source1@CUSTOMERKEY == source2@CUSTOMERKEY,",
+				"     joinType:'outer',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> SalesCustomerJoin",
+				"SalesCustomerJoin aggregate(SALESAMOUNT = sum(SALESAMOUNT),",
+				"          UNITPRICE = sum(UNITPRICE),",
+				"          ORDERQUANTITY = sum(ORDERQUANTITY)) ~> AggregateOrder",
+				"AggregateOrder sort(asc(SALESAMOUNT, true)) ~> sort1",
+				"sort1 sink(validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     store: 'cache',",
+				"     format: 'inline',",
+				"     output: true,",
+				"     saveOrder: 1) ~> sink1"
+			]
+		}
+	}
+}

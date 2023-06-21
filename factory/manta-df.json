@@ -1,0 +1,9 @@
+{
+	"name": "manta-df",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "866faf08-eec2-4b1b-9490-a4667ff8be2c",
+		"tenantId": "903f866d-ae7e-4f4f-9155-6ef202a041ba"
+	}
+}

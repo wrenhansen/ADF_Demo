@@ -1,0 +1,186 @@
+{
+	"name": "CustomerDataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Snowflake1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeTable",
+		"schema": [
+			{
+				"name": "CUSTOMERKEY",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "GEOGRAPHYKEY",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "CUSTOMERALTERNATEKEY",
+				"type": "VARCHAR",
+				"precision": 15,
+				"scale": 0
+			},
+			{
+				"name": "TITLE",
+				"type": "VARCHAR",
+				"precision": 8,
+				"scale": 0
+			},
+			{
+				"name": "FIRSTNAME",
+				"type": "VARCHAR",
+				"precision": 50,
+				"scale": 0
+			},
+			{
+				"name": "MIDDLENAME",
+				"type": "VARCHAR",
+				"precision": 50,
+				"scale": 0
+			},
+			{
+				"name": "LASTNAME",
+				"type": "VARCHAR",
+				"precision": 50,
+				"scale": 0
+			},
+			{
+				"name": "NAMESTYLE",
+				"type": "BOOLEAN",
+				"precision": 1,
+				"scale": 0
+			},
+			{
+				"name": "BIRTHDATE",
+				"type": "DATE",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "MARITALSTATUS",
+				"type": "VARCHAR",
+				"precision": 1,
+				"scale": 0
+			},
+			{
+				"name": "SUFFIX",
+				"type": "VARCHAR",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "GENDER",
+				"type": "VARCHAR",
+				"precision": 1,
+				"scale": 0
+			},
+			{
+				"name": "EMAILADDRESS",
+				"type": "VARCHAR",
+				"precision": 50,
+				"scale": 0
+			},
+			{
+				"name": "YEARLYINCOME",
+				"type": "NUMBER",
+				"precision": 24,
+				"scale": 8
+			},
+			{
+				"name": "TOTALCHILDREN",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "NUMBERCHILDRENATHOME",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "ENGLISHEDUCATION",
+				"type": "VARCHAR",
+				"precision": 40,
+				"scale": 0
+			},
+			{
+				"name": "SPANISHEDUCATION",
+				"type": "VARCHAR",
+				"precision": 40,
+				"scale": 0
+			},
+			{
+				"name": "FRENCHEDUCATION",
+				"type": "VARCHAR",
+				"precision": 40,
+				"scale": 0
+			},
+			{
+				"name": "ENGLISHOCCUPATION",
+				"type": "VARCHAR",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "SPANISHOCCUPATION",
+				"type": "VARCHAR",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "FRENCHOCCUPATION",
+				"type": "VARCHAR",
+				"precision": 100,
+				"scale": 0
+			},
+			{
+				"name": "HOUSEOWNERFLAG",
+				"type": "VARCHAR",
+				"precision": 1,
+				"scale": 0
+			},
+			{
+				"name": "NUMBERCARSOWNED",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "ADDRESSLINE1",
+				"type": "VARCHAR",
+				"precision": 120,
+				"scale": 0
+			},
+			{
+				"name": "ADDRESSLINE2",
+				"type": "VARCHAR",
+				"precision": 120,
+				"scale": 0
+			},
+			{
+				"name": "PHONE",
+				"type": "VARCHAR",
+				"precision": 20,
+				"scale": 0
+			},
+			{
+				"name": "DATEFIRSTPURCHASE",
+				"type": "DATE",
+				"precision": 10,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "PUBLIC",
+			"table": "DIMCUSTOMER"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
