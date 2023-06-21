@@ -1,0 +1,532 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "manta-df"
+		},
+		"Snowflake1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Snowflake1'"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Snowflake1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Snowflake",
+				"typeProperties": {
+					"authenticationType": "Basic",
+					"connectionString": "[parameters('Snowflake1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CustomerDataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Snowflake1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeTable",
+				"schema": [
+					{
+						"name": "CUSTOMERKEY",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "GEOGRAPHYKEY",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "CUSTOMERALTERNATEKEY",
+						"type": "VARCHAR",
+						"precision": 15,
+						"scale": 0
+					},
+					{
+						"name": "TITLE",
+						"type": "VARCHAR",
+						"precision": 8,
+						"scale": 0
+					},
+					{
+						"name": "FIRSTNAME",
+						"type": "VARCHAR",
+						"precision": 50,
+						"scale": 0
+					},
+					{
+						"name": "MIDDLENAME",
+						"type": "VARCHAR",
+						"precision": 50,
+						"scale": 0
+					},
+					{
+						"name": "LASTNAME",
+						"type": "VARCHAR",
+						"precision": 50,
+						"scale": 0
+					},
+					{
+						"name": "NAMESTYLE",
+						"type": "BOOLEAN",
+						"precision": 1,
+						"scale": 0
+					},
+					{
+						"name": "BIRTHDATE",
+						"type": "DATE",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "MARITALSTATUS",
+						"type": "VARCHAR",
+						"precision": 1,
+						"scale": 0
+					},
+					{
+						"name": "SUFFIX",
+						"type": "VARCHAR",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "GENDER",
+						"type": "VARCHAR",
+						"precision": 1,
+						"scale": 0
+					},
+					{
+						"name": "EMAILADDRESS",
+						"type": "VARCHAR",
+						"precision": 50,
+						"scale": 0
+					},
+					{
+						"name": "YEARLYINCOME",
+						"type": "NUMBER",
+						"precision": 24,
+						"scale": 8
+					},
+					{
+						"name": "TOTALCHILDREN",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "NUMBERCHILDRENATHOME",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "ENGLISHEDUCATION",
+						"type": "VARCHAR",
+						"precision": 40,
+						"scale": 0
+					},
+					{
+						"name": "SPANISHEDUCATION",
+						"type": "VARCHAR",
+						"precision": 40,
+						"scale": 0
+					},
+					{
+						"name": "FRENCHEDUCATION",
+						"type": "VARCHAR",
+						"precision": 40,
+						"scale": 0
+					},
+					{
+						"name": "ENGLISHOCCUPATION",
+						"type": "VARCHAR",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "SPANISHOCCUPATION",
+						"type": "VARCHAR",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "FRENCHOCCUPATION",
+						"type": "VARCHAR",
+						"precision": 100,
+						"scale": 0
+					},
+					{
+						"name": "HOUSEOWNERFLAG",
+						"type": "VARCHAR",
+						"precision": 1,
+						"scale": 0
+					},
+					{
+						"name": "NUMBERCARSOWNED",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "ADDRESSLINE1",
+						"type": "VARCHAR",
+						"precision": 120,
+						"scale": 0
+					},
+					{
+						"name": "ADDRESSLINE2",
+						"type": "VARCHAR",
+						"precision": 120,
+						"scale": 0
+					},
+					{
+						"name": "PHONE",
+						"type": "VARCHAR",
+						"precision": 20,
+						"scale": 0
+					},
+					{
+						"name": "DATEFIRSTPURCHASE",
+						"type": "DATE",
+						"precision": 10,
+						"scale": 0
+					}
+				],
+				"typeProperties": {
+					"schema": "PUBLIC",
+					"table": "DIMCUSTOMER"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Snowflake1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SalesDataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Snowflake1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeTable",
+				"schema": [
+					{
+						"name": "PRODUCTKEY",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "ORDERDATEKEY",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "DUEDATEKEY",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "SHIPDATEKEY",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "CUSTOMERKEY",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "PROMOTIONKEY",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "CURRENCYKEY",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "SALESTERRITORYKEY",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "SALESORDERNUMBER",
+						"type": "VARCHAR",
+						"precision": 20,
+						"scale": 0
+					},
+					{
+						"name": "SALESORDERLINENUMBER",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "REVISIONNUMBER",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "ORDERQUANTITY",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "UNITPRICE",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 4
+					},
+					{
+						"name": "EXTENDEDAMOUNT",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 4
+					},
+					{
+						"name": "UNITPRICEDISCOUNTPCT",
+						"type": "FLOAT",
+						"precision": 15,
+						"scale": 0
+					},
+					{
+						"name": "DISCOUNTAMOUNT",
+						"type": "FLOAT",
+						"precision": 15,
+						"scale": 0
+					},
+					{
+						"name": "PRODUCTSTANDARDCOST",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 4
+					},
+					{
+						"name": "TOTALPRODUCTCOST",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 4
+					},
+					{
+						"name": "SALESAMOUNT",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 4
+					},
+					{
+						"name": "TAXAMT",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 4
+					},
+					{
+						"name": "FREIGHT",
+						"type": "NUMBER",
+						"precision": 38,
+						"scale": 4
+					},
+					{
+						"name": "CARRIERTRACKINGNUMBER",
+						"type": "VARCHAR",
+						"precision": 25,
+						"scale": 0
+					},
+					{
+						"name": "CUSTOMERPONUMBER",
+						"type": "VARCHAR",
+						"precision": 25,
+						"scale": 0
+					},
+					{
+						"name": "ORDERDATE",
+						"type": "TIMESTAMP_NTZ",
+						"precision": 29,
+						"scale": 9
+					},
+					{
+						"name": "DUEDATE",
+						"type": "TIMESTAMP_NTZ",
+						"precision": 29,
+						"scale": 9
+					},
+					{
+						"name": "SHIPDATE",
+						"type": "TIMESTAMP_NTZ",
+						"precision": 29,
+						"scale": 9
+					}
+				],
+				"typeProperties": {
+					"schema": "PUBLIC",
+					"table": "FACTINTERNETSALES"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Snowflake1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AggregateSalesData')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "CustomerDataset",
+								"type": "DatasetReference"
+							},
+							"name": "source1",
+							"description": "Snowflake Data Source"
+						},
+						{
+							"dataset": {
+								"referenceName": "SalesDataset",
+								"type": "DatasetReference"
+							},
+							"name": "source2"
+						}
+					],
+					"sinks": [
+						{
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SalesCustomerJoin",
+							"description": "join 'Customer' and 'Sales'"
+						},
+						{
+							"name": "AggregateOrder"
+						},
+						{
+							"name": "sort1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          CUSTOMERKEY as decimal(38,0),",
+						"          GEOGRAPHYKEY as decimal(38,0),",
+						"          CUSTOMERALTERNATEKEY as string,",
+						"          TITLE as string,",
+						"          FIRSTNAME as string,",
+						"          MIDDLENAME as string,",
+						"          LASTNAME as string,",
+						"          NAMESTYLE as boolean,",
+						"          BIRTHDATE as date,",
+						"          MARITALSTATUS as string,",
+						"          SUFFIX as string,",
+						"          GENDER as string,",
+						"          EMAILADDRESS as string,",
+						"          YEARLYINCOME as decimal(24,8),",
+						"          TOTALCHILDREN as decimal(38,0),",
+						"          NUMBERCHILDRENATHOME as decimal(38,0),",
+						"          ENGLISHEDUCATION as string,",
+						"          SPANISHEDUCATION as string,",
+						"          FRENCHEDUCATION as string,",
+						"          ENGLISHOCCUPATION as string,",
+						"          SPANISHOCCUPATION as string,",
+						"          FRENCHOCCUPATION as string,",
+						"          HOUSEOWNERFLAG as string,",
+						"          NUMBERCARSOWNED as decimal(38,0),",
+						"          ADDRESSLINE1 as string,",
+						"          ADDRESSLINE2 as string,",
+						"          PHONE as string,",
+						"          DATEFIRSTPURCHASE as date",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     format: 'table') ~> source1",
+						"source(output(",
+						"          PRODUCTKEY as decimal(38,0),",
+						"          ORDERDATEKEY as decimal(38,0),",
+						"          DUEDATEKEY as decimal(38,0),",
+						"          SHIPDATEKEY as decimal(38,0),",
+						"          CUSTOMERKEY as decimal(38,0),",
+						"          PROMOTIONKEY as decimal(38,0),",
+						"          CURRENCYKEY as decimal(38,0),",
+						"          SALESTERRITORYKEY as decimal(38,0),",
+						"          SALESORDERNUMBER as string,",
+						"          SALESORDERLINENUMBER as decimal(38,0),",
+						"          REVISIONNUMBER as decimal(38,0),",
+						"          ORDERQUANTITY as decimal(38,0),",
+						"          UNITPRICE as decimal(38,4),",
+						"          EXTENDEDAMOUNT as decimal(38,4),",
+						"          UNITPRICEDISCOUNTPCT as double,",
+						"          DISCOUNTAMOUNT as double,",
+						"          PRODUCTSTANDARDCOST as decimal(38,4),",
+						"          TOTALPRODUCTCOST as decimal(38,4),",
+						"          SALESAMOUNT as decimal(38,4),",
+						"          TAXAMT as decimal(38,4),",
+						"          FREIGHT as decimal(38,4),",
+						"          CARRIERTRACKINGNUMBER as string,",
+						"          CUSTOMERPONUMBER as string,",
+						"          ORDERDATE as timestamp,",
+						"          DUEDATE as timestamp,",
+						"          SHIPDATE as timestamp",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     format: 'table') ~> source2",
+						"source1, source2 join(source1@CUSTOMERKEY == source2@CUSTOMERKEY,",
+						"     joinType:'outer',",
+						"     matchType:'exact',",
+						"     ignoreSpaces: false,",
+						"     broadcast: 'auto')~> SalesCustomerJoin",
+						"SalesCustomerJoin aggregate(SALESAMOUNT = sum(SALESAMOUNT),",
+						"          UNITPRICE = sum(UNITPRICE),",
+						"          ORDERQUANTITY = sum(ORDERQUANTITY)) ~> AggregateOrder",
+						"AggregateOrder sort(asc(SALESAMOUNT, true)) ~> sort1",
+						"sort1 sink(validateSchema: false,",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     store: 'cache',",
+						"     format: 'inline',",
+						"     output: true,",
+						"     saveOrder: 1) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/CustomerDataset')]",
+				"[concat(variables('factoryId'), '/datasets/SalesDataset')]"
+			]
+		}
+	]
+}
