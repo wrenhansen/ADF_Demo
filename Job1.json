@@ -1,0 +1,129 @@
+{
+    "job": {
+        "name": "Job1",
+        "facets": {},
+        "namespace": "manta"
+    },
+    "run": {
+        "runId": "26b84dca-befc-4c80-c03a-945a6e7feb3a",
+        "facets": {
+            "nominalTime": {
+                "_producer": "Batch1",
+                "_schemaURL": "https://openlineage.io/spec/facets/1-0-0/NominalTimeRunFacet.json#/$defs/NominalTimeRunFacet",
+                "nominalEndTime": "2023-01-02T16:49:06.865Z",
+                "nominalStartTime": "2023-01-02T16:43:06.865Z"
+            }
+        }
+    },
+    "inputs": [{
+            "name": "db1.prod.table1",
+            "facets": {
+                "schema": {
+                    "fields": [{
+                            "name": "name"
+                        }, {
+                            "name": "address"
+                        }, {
+                            "name": "phone"
+                        }, {
+                            "name": "emp_code"
+                        }, {
+                            "name": "other"
+                        }
+                    ],
+                    "_producer": "Batch1",
+                    "_schemaURL": "https://openlineage.io/spec/facets/1-0-0/SchemaDatasetFacet.json#/$defs/SchemaDatasetFacet"
+                }
+            },
+            "namespace": "manta"
+        }
+    ],
+    "outputs": [{
+            "name": "db1.prod.table2",
+            "facets": {
+                "schema": {
+                    "fields": [{
+                            "name": "full_name",
+                            "type": "String"
+                        }, {
+                            "name": "home_address",
+                            "type": "String"
+                        }, {
+                            "name": "cell_phone",
+                            "type": "String"
+                        }, {
+                            "name": "employee_number",
+                            "type": "String"
+                        }, {
+                            "name": "email_address",
+                            "type": "String"
+                        }
+                    ],
+                    "producer": "Batch1",
+                    "_producer": "Batch1",
+                    "_schemaURL": "https://openlineage.io/spec/facets/1-0-0/SchemaDatasetFacet.json#/$defs/SchemaDatasetFacet"
+                },
+                "columnLineage": {
+                    "fields": {
+                        "full_name": {
+                            "inputFields": [{
+                                    "name": "db1.prod.table1",
+                                    "field": "name",
+                                    "namespace": "manta"
+                                }
+                            ],
+                            "transformationType": "NONE",
+                            "transformationDescription": ""
+					},
+					"home_address": {
+                            "inputFields": [{
+                                    "name": "db1.prod.table1",
+                                    "field": "address",
+                                    "namespace": "manta"
+                                }
+                            ],
+                            "transformationType": "NONE",
+                            "transformationDescription": ""
+					},"cell_phone": {
+                            "inputFields": [{
+                                    "name": "db1.prod.table1",
+                                    "field": "phone",
+                                    "namespace": "manta"
+                                }
+                            ],
+                            "transformationType": "NONE",
+                            "transformationDescription": ""
+					},"employee_number": {
+                            "inputFields": [{
+                                    "name": "db1.prod.table1",
+                                    "field": "emp_code",
+                                    "namespace": "manta"
+                                }
+                            ],
+                            "transformationType": "NONE",
+                            "transformationDescription": ""
+					},"other": {
+                            "inputFields": [{
+                                    "name": "db1.prod.table1",
+                                    "field": "email",
+                                    "namespace": "manta"
+                                }
+                            ],
+                            "transformationType": "NONE",
+                            "transformationDescription": ""
+					}
+					},
+                       
+                    
+                    "_producer": "Batch1",
+                    "_schemaURL": "https://openlineage.io/spec/facets/1-0-1/ColumnLineageDatasetFacet.json#/$defs/ColumnLineageDatasetFacet"
+                }
+            },
+            "namespace": "manta"
+        }
+    ],
+    "producer": "Batch1",
+    "eventTime": "2023-01-02T16:43:06.865Z",
+    "eventType": "COMPLETE",
+    "schemaURL": "https://openlineage.io/spec/1-0-3/OpenLineage.json#/$defs/RunEvent"
+}
